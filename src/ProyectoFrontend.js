@@ -107,6 +107,15 @@ export class ProyectoFrontend extends LitElement {
                       <p>ID: ${this.pokemon.id}</p>
                       <p>Altura: ${this.pokemon.height}</p>
                       <p>Peso: ${this.pokemon.weight}</p>
+                      ${this.mostrarInfo ? html`
+
+                      <p>Experiencia: ${this.pokemon.base_experience}</p>
+
+                      <p>Tipo: ${this.pokemon.types[0].type.name}</p>
+
+                      <p>Habilidad: ${this.pokemon.abilities[0].ability.name}</p>
+
+                      ` : ""}
                       <button @click=${this.agregarPokemon}>Agregar</button>
                       <button @click=${this.mostrarDetalle}>Mas información</button>
 
