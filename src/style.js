@@ -14,9 +14,7 @@ export const styles = css`
     margin: 0 auto;
     padding: 40px 0;
 
-    display: flex;
-    flex-direction: column;
-    gap: 35px;
+    box-sizing: border-box;
 }
 .card{
 
@@ -88,10 +86,13 @@ button{
 
 .team-section {
     width: 100%;
-    margin: 38px auto 0;
+    max-width: 1100px;
+    margin: 0 auto;
     padding: 28px;
 
-    background: #8D9296;
+    box-sizing: border-box;
+
+    background: #9da4aa;
     border-radius: 20px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
 }
@@ -189,8 +190,11 @@ button{
 }
 
 .empty-message {
+    width: 100%;
     margin: 0;
-    padding: 28px;
+    padding: 30px 20px;
+
+    box-sizing: border-box;
 
     background: #f8fafc;
     border: 2px dashed #cbd5e1;

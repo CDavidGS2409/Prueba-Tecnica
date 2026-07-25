@@ -142,65 +142,65 @@ export class ProyectoFrontend extends LitElement {
 
             ` : ""}
 
-<section class="team-section">
+            <section class="team-section">
 
-    <h2>Equipo Pokémon</h2>
+                <h2>Equipo Pokémon</h2>
 
-    ${this.pokemon1.length === 0
-        ? html`
-            <p class="empty-message">
-                Ningún Pokemon Registrado.
-            </p>
-        `
-        : html`
-            <div class="table-container">
+                ${this.pokemon1.length === 0
+                    ? html`
+                        <p class="empty-message">
+                            Ningún Pokemon Registrado.
+                        </p>
+                    `
+                    : html`
+                        <div class="table-container">
 
-                <table class="pokemon-table">
+                            <table class="pokemon-table">
 
-                    <thead>
-                        <tr>
-                            <th>Imagen</th>
-                            <th>Nombre</th>
-                            <th>ID</th>
-                        </tr>
-                    </thead>
+                                <thead>
+                                    <tr>
+                                        <th>Imagen</th>
+                                        <th>Nombre</th>
+                                        <th>ID</th>
+                                    </tr>
+                                </thead>
 
-                    <tbody>
-                        ${this.pokemon1.map(p => html`
-                            <tr>
-                                <td>
-                                    <img
-                                        class="team-image"
-                                        src="${p.sprites.front_default}"
-                                        alt="${p.name}"
-                                    >
-                                </td>
+                                <tbody>
+                                    ${this.pokemon1.map(p => html`
+                                        <tr>
+                                            <td>
+                                                <img
+                                                    class="team-image"
+                                                    src="${p.sprites.front_default}"
+                                                    alt="${p.name}"
+                                                >
+                                            </td>
 
-                                <td class="pokemon-name">
-                                    ${p.name.toUpperCase()}
-                                </td>
+                                            <td class="pokemon-name">
+                                                ${p.name.toUpperCase()}
+                                            </td>
 
-                                <td>#${p.id}</td>
+                                            <td>#${p.id}</td>
 
-                                <td>
-                                    <button
-                                        class="delete-button"
-                                        @click=${() => this.eliminarPokemon(p.id)}
-                                    >
-                                        Eliminar
-                                    </button>
-                                </td>
-                            </tr>
-                        `)}
-                    </tbody>
+                                            <td>
+                                                <button
+                                                    class="delete-button"
+                                                    @click=${() => this.eliminarPokemon(p.id)}
+                                                >
+                                                    Eliminar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    `)}
+                                </tbody>
 
-                </table>
+                            </table>
 
-            </div>
-        `
-    }
+                        </div>
+                    `
+                }
 
-</section>
+            </section>
 
         </div>
         
