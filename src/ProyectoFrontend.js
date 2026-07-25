@@ -16,6 +16,7 @@ export class ProyectoFrontend extends LitElement {
         this.mostrarInfo = false;
     }
 
+    //Metodos 
     async buscarPokemon(){
       const param = this.renderRoot.querySelector("#txtPokemon").value;
 
@@ -59,23 +60,25 @@ export class ProyectoFrontend extends LitElement {
       this.pokemon1 = this.pokemon1.filter(pokemon => pokemon.id !== id);
     }
 
+    //Estilos
+
     static styles = styles;
     
-
+    //Render
     render(){
         return html`
-        <div class="header">
-          <h1>Pokédex</h1>
-          <div class="search-bar">
-              <input id="txtPokemon" placeholder="Nombre o ID">
-              <button @click=${this.buscarPokemon}>
-                  Buscar
-              </button>
-              <button @click=${this.buscarAleatorio}>
-                  Busqueda Aleatoria
-              </button>
+            <div class="header">
+              <h1>Pokédex</h1>
+              <div class="search-bar">
+                  <input id="txtPokemon" placeholder="Nombre o ID">
+                  <button @click=${this.buscarPokemon}>
+                      Buscar
+                  </button>
+                  <button @click=${this.buscarAleatorio}>
+                      Busqueda Aleatoria
+                  </button>
+              </div>
           </div>
-      </div>
 
             ${this.pokemon ? html`
               <div class = "card">
