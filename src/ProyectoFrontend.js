@@ -54,6 +54,10 @@ export class ProyectoFrontend extends LitElement {
       this.pokemon=datos;
     }
 
+    eliminarPokemon(id){
+      this.pokemon1 = this.pokemon1.filter(pokemon => pokemon.id !== id);
+    }
+
     static styles = css`
         .container{
             max-width:700px;
@@ -137,6 +141,12 @@ export class ProyectoFrontend extends LitElement {
                   </td>
                   <td>${p.name}</td>
                   <td>${p.id}</td>
+
+                  <td>
+                    <button @click=${() => this.eliminarPokemon(p.id)}>
+                      Eliminar
+                    </button>
+                  </td>
 
                 </tr>
                 
