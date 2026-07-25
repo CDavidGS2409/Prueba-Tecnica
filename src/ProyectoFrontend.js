@@ -1,4 +1,5 @@
 import { html, css, LitElement } from 'lit';
+import {styles} from "./style.js";
 
 export class ProyectoFrontend extends LitElement {
 
@@ -58,100 +59,145 @@ export class ProyectoFrontend extends LitElement {
       this.pokemon1 = this.pokemon1.filter(pokemon => pokemon.id !== id);
     }
 
-    static styles = css`
-        .container{
-            max-width:700px;
-            margin:auto;
-            padding: 20px;
-        }
-
-        input{
-            padding: 8px;
-        }
-
-        button{
-            padding: 8px 15px;
-            margin-left: 5px;
-            cursor : pointer;
-
-        }
-
-        .card{
-            margin-top: 20px;
-            border: 1px solid red;
-
-            padding:20px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        table{
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        td,th{
-            border: 1px solid blue;
-            padding:8px;
-        }
-    `;
+    static styles = styles;
+    
 
     render(){
         return html`
-        <div class= "container">
-            <h2>Pokedex</h2>
-            <input id="txtPokemon" placeholder="Nombre">
-            <button @click=${this.buscarPokemon}>Buscar</button>
-            <button @click=${this.buscarAleatorio}> Busqueda Aleatoria </button>
+        <div class="header">
+          <h1>Pokédex</h1>
+          <div class="search-bar">
+              <input id="txtPokemon" placeholder="Nombre o ID">
+              <button @click=${this.buscarPokemon}>
+                  Buscar
+              </button>
+              <button @click=${this.buscarAleatorio}>
+                  Busqueda Aleatoria
+              </button>
+          </div>
+      </div>
+
             ${this.pokemon ? html`
-            <div class="card">
-              <h2>${this.pokemon.name}</h2>
-              <img src="${this.pokemon.sprites.front_default}"
-                      alt="${this.pokemon.name}">
-                      <p>ID: ${this.pokemon.id}</p>
-                      <p>Altura: ${this.pokemon.height}</p>
-                      <p>Peso: ${this.pokemon.weight}</p>
-                      ${this.mostrarInfo ? html`
+              <div class = "card">
+                <div class="pokemon-image">
+                  <h2>${this.pokemon.name.toUpperCase()}</h2>
 
-                      <p>Experiencia: ${this.pokemon.base_experience}</p>
+                  <img 
+                    src="${this.pokemon.sprites.front_default}"
+                    alt="${this.pokemon.name}"
+                    >
+                </div>
 
-                      <p>Tipo: ${this.pokemon.types[0].type.name}</p>
+                <div class="pokemon-info">
+                
+                <div class = "fila">
+                  <span>ID</span>
+                  <span>${this.pokemon.id}</span>
+                </div>
 
-                      <p>Habilidad: ${this.pokemon.abilities[0].ability.name}</p>
 
-                      ` : ""}
-                      <button @click=${this.agregarPokemon}>Agregar</button>
-                      <button @click=${this.mostrarDetalle}>Mas información</button>
+                <div class = "fila">
+                  <span>Altura</span>
+                  <span>${this.pokemon.height}</span>
+                </div>
 
+                <div class = "fila">
+                  <span>Peso</span>
+                  <span>${this.pokemon.weight}</span>
+                </div>
+
+                
+        ${this.mostrarInfo ? html`
+
+
+
+            <div class="fila">
+                <span>Tipo</span>
+                <span>${this.pokemon.types[0].type.name}</span>
             </div>
+
+            <div class="fila">
+                <span>Habilidad</span>
+                <span>${this.pokemon.abilities[0].ability.name}</span>
+            </div>
+
+        ` : ""}
+
+                    <div class="botones">
+
+                        <button @click=${this.agregarPokemon}>
+                            Agregar
+                        </button>
+
+                        <button @click=${this.mostrarDetalle}>
+                            ${this.mostrarInfo ? "Ocultar información" : "Más información"}
+                        </button>
+
+                    </div>
+                </div>
+              </div>
+
             ` : ""}
 
-            <h2>Equipo Pokemon</h2>
+<section class="team-section">
 
-            <table>
-              <tr>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>ID</th>
-              </tr> 
-              ${this.pokemon1.map(p => html`
-                <tr> 
-                  <td>
-                      <img width="60" src="${p.sprites.front_default}">
-                  </td>
-                  <td>${p.name}</td>
-                  <td>${p.id}</td>
+    <h2>Equipo Pokémon</h2>
 
-                  <td>
-                    <button @click=${() => this.eliminarPokemon(p.id)}>
-                      Eliminar
-                    </button>
-                  </td>
+    ${this.pokemon1.length === 0
+        ? html`
+            <p class="empty-message">
+                Ningún Pokemon Registrado.
+            </p>
+        `
+        : html`
+            <div class="table-container">
 
-                </tr>
-                
-              `)}
-            </table>
+                <table class="pokemon-table">
+
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>ID</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        ${this.pokemon1.map(p => html`
+                            <tr>
+                                <td>
+                                    <img
+                                        class="team-image"
+                                        src="${p.sprites.front_default}"
+                                        alt="${p.name}"
+                                    >
+                                </td>
+
+                                <td class="pokemon-name">
+                                    ${p.name.toUpperCase()}
+                                </td>
+
+                                <td>#${p.id}</td>
+
+                                <td>
+                                    <button
+                                        class="delete-button"
+                                        @click=${() => this.eliminarPokemon(p.id)}
+                                    >
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        `)}
+                    </tbody>
+
+                </table>
+
+            </div>
+        `
+    }
+
+</section>
 
         </div>
         
